@@ -1,0 +1,59 @@
+.side-menu{
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: red;
+    min-height: calc(100vh - 80px);
+    width: 15vw;
+    min-width: 180px;
+
+    .tasks{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .projects{
+        display: flex;
+        flex-direction: column;
+    }
+}
+
+//DROPDOWN BUTTON CSS 
+.dropbtn, .side-btn {
+    background-color: #3498DB;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    height: 50px;
+    width: 180px;
+
+  }
+  
+ // Dropdown button and side buttons on hover & focus 
+    .dropbtn:hover,.side-btn:hover,.side-btn:focus, .dropbtn:focus {
+    background-color: #2980B9;
+  } 
+
+ .dropdown-pjct{
+// The contetn of the dropdown will be hidden by default     
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+
+        button{
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+        }
+      }
+
+ }
