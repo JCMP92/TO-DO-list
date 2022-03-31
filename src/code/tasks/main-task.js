@@ -1,6 +1,6 @@
 'use strict';
 
-import { pageTilte } from "../general-builders/builders.js";
+import { pageTilte, pageContent } from "../general-builders/builders.js";
 
 const taskPage = (() => {
 
@@ -10,6 +10,11 @@ const taskPage = (() => {
         taskTitle.setAttribute('id', 'task-title');
 
     titleContainer.appendChild(taskTitle);
+
+    const tasksContainer = pageContent('New Task', 'task-page-btn');
+        tasksContainer.setAttribute('id', 'task-container');
+        
+    titleContainer.appendChild(tasksContainer);
 })
 ();
 
