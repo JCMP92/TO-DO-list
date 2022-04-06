@@ -1,3 +1,5 @@
+import { createProject } from "./modules/createProjects";
+
 const projects = (() => {
 
     //EMPTY ARRAY WHERE PROJECTS WILL BE STORED
@@ -12,8 +14,10 @@ const projects = (() => {
     }
 
     function newProject(name) {
+        // const name = projectTitleInput.value;
         const project = new Project(name);
         projectsContainer.push(project);
+        createProject();
 
         console.log(projects.projectsContainer);
     };

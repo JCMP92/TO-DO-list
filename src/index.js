@@ -5,3 +5,4 @@ import"./style/style.scss";
 
 projects.newProject('Code');
 projects.newProject('Coder');
+projects.newProject('New-Coder');
