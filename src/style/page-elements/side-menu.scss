@@ -19,7 +19,7 @@
 }
 
 //DROPDOWN BUTTON CSS 
-.dropbtn, .side-btn {
+.side-btn {
     background-color: #3498DB;
     color: white;
     padding: 16px;
@@ -33,26 +33,29 @@
   }
   
  // Dropdown button and side buttons on hover & focus 
-    .dropbtn:hover,.side-btn:hover,.side-btn:focus, .dropbtn:focus {
+    .side-btn:hover,.side-btn:focus{
     background-color: #2980B9;
   } 
 
  .dropdown-pjct{
-// The contetn of the dropdown will be hidden by default     
-    .dropdown-content {
-        display: none;
-        position: absolute;
-        background-color: #f1f1f1;
-        min-width: 160px;
-        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-        z-index: 1;
-
-        button{
-            color: black;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: flex;
+    .project-add-btn{
+        display: flex;
+        width: 180px;
+        justify-content: space-between;
+        .dropbtn{
+            background-color: #3498DB;
+            color: white;
+            padding: 16px;
+            font-size: 10px;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+            height: 50px;
+            width: 70px;
         }
-      }
+        .dropbtn:hover{
+            background-color: #2980B9;
+        }
+    }
 
  }
