@@ -17,10 +17,10 @@ const projects = (() => {
         // const name = projectTitleInput.value;
         const project = new Project(name);
         projectsContainer.push(project);
-        createProject();
-
-        console.log(projects.projectsContainer);
+        createProject(name);
     };
+
+    
 
     return{
         projectsContainer,
