@@ -1,14 +1,13 @@
 import  projects  from "../projects";
 
 function createProject (identifier) {
-    const projectCount = document.querySelector('.project-count');
+
     const projectsStorageDiv = document.querySelector('.projects-div-store');
 
- //SAVE THE proyectList AS 'projects' INSIDE THE LOCAL STORAGE
+     //SAVE THE proyectList AS 'projects' INSIDE THE LOCAL STORAGE
 
-    projectsLocalStorage();
- 
-    projectCount.textContent = projects.projectsContainer.length;
+     projectsLocalStorage();
+
 
  //CREATION OF THE PROJECT CARD
      const projectCard = document.createElement('div');
@@ -59,6 +58,7 @@ function createProject (identifier) {
      projectCard.appendChild(iconsContainer);
      projectsStorageDiv.appendChild(projectCard);
 
+
      
     //DELETE BUTTONS FUNCTION
     deleteIcon.addEventListener('click', function (e) {
@@ -68,12 +68,15 @@ function createProject (identifier) {
         removePorject.remove();
         projectsLocalStorage();
     })
+
 };    
 
 
 
 function projectsLocalStorage () {
+    const projectCount = document.querySelector('.project-count');
     localStorage.setItem('projects', JSON.stringify(projects.projectsContainer));
+    projectCount.textContent = projects.projectsContainer.length;
     console.log(projects.projectsContainer);
 };
 
