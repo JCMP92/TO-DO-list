@@ -1,4 +1,4 @@
-import { createProject } from "./modules/createProjects";
+import { createProject } from "./modules/projectFunctions";
 
 const projects = (() => {
 

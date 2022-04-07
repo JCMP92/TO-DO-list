@@ -68,14 +68,17 @@ function createProject (identifier) {
         removePorject.remove();
         projectsLocalStorage();
     })
+};    
 
-    function projectsLocalStorage () {
-        localStorage.setItem('projects', JSON.stringify(projects.projectsContainer));
-        console.log(projects.projectsContainer);
-    };
-    
 
-}     
+
+function projectsLocalStorage () {
+    localStorage.setItem('projects', JSON.stringify(projects.projectsContainer));
+    console.log(projects.projectsContainer);
+};
+
+
+
  export{
     createProject,
 }
