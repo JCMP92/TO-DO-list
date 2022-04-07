@@ -1,0 +1,94 @@
+@mixin click-button {
+    cursor: pointer;
+    &:active {
+      transform: scale(0.94);
+    }
+  }
+
+.modal-newproj{
+    position:fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0); //using scale() allows us to transition the display of modal.
+    transition: 100ms ease-in-out;
+    border: 1px solid gray;
+    border: none;
+    border-radius: 10px;
+    z-index: 10; //we need this, so the modal stays above everything else.
+    background-color: white;
+    width: 500px;
+    max-width: 80%;
+
+    .modal-header-newproj{
+        padding: 5px 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: rgb(54, 54, 54);
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        color: white;
+        button{
+            @include click-button();
+            border: none;
+            outline: none;
+            background: none;
+            font-size: 1.5rem;
+            font-weight:bold;
+            color: blue;
+        }
+    }
+    .modal-body-newproj{
+        font-size: 1.2rem;
+        padding: 10px 15px;
+          form{
+            display: flex;
+            flex-direction: column;
+              input{
+                padding: 0 10px;
+                margin-bottom: 10px;
+                border-radius: 10px;
+                border: .05px solid;
+                background-color: white;
+              }
+              button{
+                @include click-button();
+               border: none;
+               outline: none;
+               background-color: blue;
+               border-radius: 10px;
+               font-weight:bold;
+               color: white;
+               width: 50%;
+               margin: auto;
+               margin-top: 20px;
+              }
+              button:hover{
+                transform: scale(1.1);
+                @include click-button();
+
+              }
+          }
+    }
+
+}
+
+.modal-newproj.active{
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#overlay-newproj{
+    position: fixed;
+    opacity: 0;
+    transition: 100ms ease-in-out;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, .5);
+    pointer-events: none;
+}
+#overlay-newproj.active{
+    opacity: 1;
+    pointer-events: all;
+}

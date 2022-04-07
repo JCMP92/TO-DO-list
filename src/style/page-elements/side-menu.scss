@@ -42,7 +42,7 @@
         display: flex;
         width: 180px;
         justify-content: space-between;
-        .dropbtn{
+        .new-proj-btn{
             background-color: #3498DB;
             color: white;
             padding: 16px;
@@ -53,7 +53,7 @@
             height: 50px;
             width: 70px;
         }
-        .dropbtn:hover{
+        .new-proj-btn:hover{
             background-color: #2980B9;
         }
     }
