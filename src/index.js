@@ -6,3 +6,4 @@ import'normalize.css';
 import"./style/style.scss";
 
 console.log(projects.projectsContainer);
+

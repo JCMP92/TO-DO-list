@@ -9,7 +9,7 @@ const doneBtn = document.getElementById('done-btn');
 const buttonEvents = (() => {
 
 //THE MODAL POP UP FLASHES WHEN WE REFRESH THE PAGE, ADDING A NO DISPLAY CLASS TO THE HTML INDEX AND THEN USING THIS LOAD EVENT LISTENER TO REMOVE IT HELPS US TO PREVENT THIS
-document.addEventListener('load', displayModal)
+document.addEventListener('load', displayModal);
 
     newProjBtn.addEventListener('click', displayModal);
     newProjBtn.addEventListener('click', openModal);

@@ -4,11 +4,6 @@ function createProject (identifier) {
 
     const projectsStorageDiv = document.querySelector('.projects-div-store');
 
-     //SAVE THE proyectList AS 'projects' INSIDE THE LOCAL STORAGE
-
-     projectsLocalStorage();
-
-
  //CREATION OF THE PROJECT CARD
      const projectCard = document.createElement('div');
      const textAndIcons = document.createElement('div');
@@ -72,16 +67,21 @@ function createProject (identifier) {
 };    
 
 
-
+//SAVE THE proyectList AS 'projects' INSIDE THE LOCAL STORAGE
 function projectsLocalStorage () {
-    const projectCount = document.querySelector('.project-count');
+    
     localStorage.setItem('projects', JSON.stringify(projects.projectsContainer));
-    projectCount.textContent = projects.projectsContainer.length;
     console.log(projects.projectsContainer);
+    projectCount ();
 };
 
+function projectCount () {
+    const projectCount = document.querySelector('.project-count');
+    projectCount.textContent = projects.projectsContainer.length;
+};
 
 
  export{
     createProject,
-}
+    projectsLocalStorage,
+ }

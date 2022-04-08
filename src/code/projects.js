@@ -1,4 +1,4 @@
-import { createProject } from "./modules/projectFunctions";
+import { createProject, projectCount, projectsLocalStorage, showStoredProjects } from "./modules/projectFunctions";
 
 
 
@@ -14,11 +14,16 @@ const projects = (() => {
                 name: 'Sample Project',
                 id: 'Sample Project',
                 tasks: []
-            }
+            } 
         ]
+        showStoredProjects();
+        projectCount();   
     } else {
         const storedProjects =JSON.parse(localStorage.getItem('projects'));
         projectsContainer = storedProjects;
+        showStoredProjects();
+        projectCount(); 
+
     }
 
     class Project {
@@ -29,16 +34,29 @@ const projects = (() => {
         }
     }
 
+    function showStoredProjects () {
+        for (let i= 0; i < projectsContainer.length; i++) {
+            
+            createProject(projectsContainer[i].name);
+            console.log(projectsContainer[i].name);
+        }
+    };
+
+
     function newProject() {
         const projectTitleInput = document.getElementById('proj-name');
         const name = projectTitleInput.value; 
         const project = new Project(name);
         projectsContainer.push(project);
         createProject(name);
+        projectsLocalStorage();
 
     };
 
-
+    function projectCount () {
+        const projectCount = document.querySelector('.project-count');
+        projectCount.textContent = projectsContainer.length;
+    };
 
     return{
         projectsContainer,
