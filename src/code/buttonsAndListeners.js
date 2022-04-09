@@ -25,6 +25,7 @@ function displayModal() {
     modalNewProj.classList.remove('no-display');
 };
 
+//FUNCTIONS TO OPEN OR CLOSE THE NEW PROJECT MODAL
 function openModal() {
     modalNewProj.classList.add('active');
     overlayNewProj.classList.add('active');
@@ -35,6 +36,8 @@ function closeModal() {
     modalNewProj.classList.remove('active');
     overlayNewProj.classList.remove('active');   
 }
+
+
 
 function restartForm() {
     const projectTitleInput = document.getElementById('proj-name');

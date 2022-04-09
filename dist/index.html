@@ -62,6 +62,29 @@
         </div>
     </div>
 
+    <!-- MODAL FOR EDIT PROJECT -->
+    <div class="modal-editproj no-display" id="modal-editproj">
+        <div class="modal-header-editproj" id="modal-header-editproj">
+            <div class="modal-title-editproj" id="modal-title-editproj">
+                <h2>Edit Project Name</h2>
+            </div>
+            <button data-close-button class="close-btn">&times;</button>  <!-- &times; is an html entity, this doesn´t scale by the size of the font -->
+        </div>
+        <div class="modal-body-editproj" id="modal-body-editproj">
+
+                        <form> 
+                            <label for="proj-name" class="name-proj">Project Name</label>
+                                <input type="text" name="proj-name" id="proj-name" placeholder="e.g. Learn Front End Development" required>
+                                                    
+                            <button id="done-btn">Edit Name</button>
+                        </form>
+                </div>
+            </div>
+            <div id="overlay-editproj"></div>
+        </div>
+    </div>
+
+
 </body>
 </html>
 
