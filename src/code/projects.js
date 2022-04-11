@@ -43,8 +43,8 @@ const projects = (() => {
         const projectTitleInput = document.getElementById('proj-name');
         const name = projectTitleInput.value; 
         const project = new Project(name);
-        //I should add here the project validators
-        if (name === ''){return;}
+        //Added a validator procces, so the projects can´t have the same name
+        if (name === ''){return}
         else if (projValidation(project)){
         //------------------------------------
         projectsContainer.push(project);
@@ -57,6 +57,8 @@ const projects = (() => {
         }    
     };
 
+
+
     function projectCount () {
         const projectCount = document.querySelector('.project-count');
         projectCount.textContent = projectsContainer.length;
@@ -65,15 +67,77 @@ const projects = (() => {
     return{
         projectsContainer,
         newProject,
-        projectCount
+        projectCount,
+        showStoredProjects
     }
 })
 ();
 
-export default projects;
 
 
 
+//BUTTONS AND EVENTS LISTENERS--------------------------------------------------------------------------------------------------
+
+const newProjBtn = document.querySelector('.new-proj-btn');
+const closeModalButton = document.querySelector('[data-close-button]');
+const closeEditButton = document.querySelector('[data-edit-close]');
+const modalNewProj = document.getElementById('modal-newproj');
+const modalEditProj = document.getElementById('modal-editproj');
+const overlayNewProj = document.getElementById('overlay-newproj');
+const doneBtn = document.getElementById('done-btn');
+const editBtn = document.getElementById('edit-btn');
+
+const buttonEvents = (() => {
+
+    //THE MODAL POP UP FLASHES WHEN WE REFRESH THE PAGE, ADDING A NO DISPLAY CLASS TO THE HTML INDEX AND THEN USING THIS LOAD EVENT LISTENER TO REMOVE IT HELPS US TO PREVENT THIS
+    window.addEventListener('load', displayModal);
+    
+        newProjBtn.addEventListener('click', openModal);
+        closeModalButton.addEventListener('click', closeModal);
+        closeEditButton.addEventListener('click', closeEditModal);
+        overlayNewProj.addEventListener('click', closeModal);
+        overlayNewProj.addEventListener('click', closeEditModal);
+        doneBtn.addEventListener('click', projects.newProject);
+        doneBtn.addEventListener('click', closeModal);
+        doneBtn.addEventListener('click', restartForm);
+       
+        
+    })
+    ();
+    
+    function displayModal() {
+        modalNewProj.classList.remove('no-display');
+        modalEditProj.classList.remove('no-display');
+    };
+    
+    //FUNCTIONS TO OPEN OR CLOSE THE NEW PROJECT MODAL
+    function openModal() {
+        modalNewProj.classList.add('active');
+        overlayNewProj.classList.add('active');
+        
+    }
+    
+    function openEditModal() {
+        modalEditProj.classList.add('active');
+        overlayNewProj.classList.add('active');
+        
+    }
+    
+    function closeModal() {
+        
+        modalNewProj.classList.remove('active');
+        overlayNewProj.classList.remove('active');   
+    }
+    
+    function closeEditModal() {
+        modalEditProj.classList.remove('active');
+        overlayNewProj.classList.remove('active');   
+    }
+    
+    function restartForm() {
+        const projectTitleInput = document.getElementById('proj-name');
+        projectTitleInput.value = ''; 
+    }
 
 
 //THIS FUNCTIONS CREATES THE CONTENT OF THE PROJECT CARDS, ADDING THE EVENT LISTENERS TO THEM
@@ -140,12 +204,34 @@ function createProject (identifier) {
         let removePorject = document.querySelector(`[data-proj-identifier='${identifier}']`);
         removePorject.remove();
         projectsLocalStorage();
-    })
+    });
 
     //EDIT ICON FUNCTION
     editIcon.addEventListener('click', function (e){
-        console.log('hi');
-    })
+        openEditModal();
+        let projectIndex = projects.projectsContainer.findIndex(elem => elem.name === e.target.parentNode.dataset.projIdentifier);
+        editBtn.addEventListener('click', (e) => {
+            const editInput = document.getElementById('new-proj-name');
+            let newName = editInput.value;
+            //Added a validator procces, so the projects can´t have the same name
+            if (newName === ''){return}
+            else if (editValidation(newName)){
+            //------------------------------------
+            projects.projectsContainer[projectIndex].name = newName;
+            projects.projectsContainer[projectIndex].id = newName;
+            
+            }
+            else{
+                alert("You already have a project with that name!");
+                restartEditForm();
+                closeEditModal();
+            }    
+            projectsLocalStorage();
+            console.log(projects.projectsContainer);
+        })
+        
+
+    });
 
 };    
 
@@ -163,8 +249,23 @@ function projValidation(projectToValidate){
     return !projects.projectsContainer.some(project => project.name === projectToValidate.name);
 }
 
+function editValidation(projectToValidate){
+    return !projects.projectsContainer.some(project => project.name === projectToValidate);
+}
+
 //RESTART TH PROJECT CREATOR FORM
 function restartProjectForm() {
     const projectTitleInput = document.getElementById('proj-name');
     projectTitleInput.value = '';
+}
+
+function restartEditForm() {
+    const projectEditTitleInput = document.getElementById('new-proj-name');
+    projectEditTitleInput.value = '';
+}
+
+
+export  {
+    projects,
+    buttonEvents
 }

@@ -1,5 +1,4 @@
-import  projects  from "./code/projects";
-import buttonEvents from "./code/buttonsAndListeners";
+import  {projects, buttonEvents}  from "./code/projects";
 
 
 import'normalize.css';
