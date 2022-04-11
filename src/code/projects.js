@@ -224,7 +224,6 @@ function createProject (identifier) {
             else{
                 alert("You already have a project with that name!");
                 restartEditForm();
-                closeEditModal();
             }    
             projectsLocalStorage();
             console.log(projects.projectsContainer);
