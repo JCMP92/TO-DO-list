@@ -1,14 +1,16 @@
 'use strict';
 
 const pageTilte = (title) => {
+    const pageContent = document.querySelector('#content');
     const titleContent = document.createElement('div');    
     const titleText = document.createElement('h2');
         titleText.classList.add('page-title');    
         titleText.textContent = title;
     
     titleContent.appendChild(titleText);
+    pageContent.appendChild(titleContent);
     
-    return titleContent;
+    // return titleContent;
 }
 
 const pageContent = (btnName, btnId) => {
@@ -23,7 +25,22 @@ const pageContent = (btnName, btnId) => {
     return pageContent;
 }
 
+const clearContent = () => {
+    const mainContent = document.querySelector('.main-container')
+    const oldContent = document.querySelector('#content');
+    if (oldContent) {
+        mainContent.removeChild(oldContent);
+    }
+
+    const newContent = document.createElement('div');
+    newContent.setAttribute('id', 'content');
+    mainContent.appendChild(newContent);
+
+    return newContent;
+};  
+
 export{
     pageTilte,
     pageContent,
+    clearContent
 }

@@ -1,3 +1,5 @@
+import { pageTilte, clearContent } from "./modules/builders";
+
 const projects = (() => {
 
     //EMPTY ARRAY WHERE PROJECTS WILL BE STORED
@@ -223,7 +225,7 @@ function createProject (identifier) {
             }
             else{
                 alert("You already have a project with that name!");
-                restartEditForm();
+                // restartEditForm();
             }    
             projectsLocalStorage();
             console.log(projects.projectsContainer);
@@ -231,6 +233,22 @@ function createProject (identifier) {
         
 
     });
+
+//PROJECT ANCHORS FUNCTIONS AND LISTENERS
+
+    const projectCards = document.querySelectorAll('a');
+
+    projectCards.forEach(projectCard => projectCard.addEventListener('click', (e) => {
+        clearContent();
+        const projectName = e.target.parentNode.dataset.projIdentifier;
+        projectTitleDisplay(projectName);
+        pageTilte(projectName);
+    }));
+
+
+    function projectTitleDisplay(nameOfProject) {
+        console.log(nameOfProject);
+    };
 
 };    
 
@@ -262,6 +280,9 @@ function restartEditForm() {
     const projectEditTitleInput = document.getElementById('new-proj-name');
     projectEditTitleInput.value = '';
 }
+
+
+
 
 
 export  {
