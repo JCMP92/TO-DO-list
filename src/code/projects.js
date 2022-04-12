@@ -82,12 +82,12 @@ const projects = (() => {
 
 const newProjBtn = document.querySelector('.new-proj-btn');
 const closeModalButton = document.querySelector('[data-close-button]');
-const closeEditButton = document.querySelector('[data-edit-close]');
+
 const modalNewProj = document.getElementById('modal-newproj');
-const modalEditProj = document.getElementById('modal-editproj');
+
 const overlayNewProj = document.getElementById('overlay-newproj');
 const doneBtn = document.getElementById('done-btn');
-const editBtn = document.getElementById('edit-btn');
+
 
 const buttonEvents = (() => {
 
@@ -96,9 +96,9 @@ const buttonEvents = (() => {
     
         newProjBtn.addEventListener('click', openModal);
         closeModalButton.addEventListener('click', closeModal);
-        closeEditButton.addEventListener('click', closeEditModal);
+
         overlayNewProj.addEventListener('click', closeModal);
-        overlayNewProj.addEventListener('click', closeEditModal);
+
         doneBtn.addEventListener('click', projects.newProject);
         doneBtn.addEventListener('click', closeModal);
         doneBtn.addEventListener('click', restartForm);
@@ -109,7 +109,7 @@ const buttonEvents = (() => {
     
     function displayModal() {
         modalNewProj.classList.remove('no-display');
-        modalEditProj.classList.remove('no-display');
+
     };
     
     //FUNCTIONS TO OPEN OR CLOSE THE NEW PROJECT MODAL
@@ -119,11 +119,6 @@ const buttonEvents = (() => {
         
     }
     
-    function openEditModal() {
-        modalEditProj.classList.add('active');
-        overlayNewProj.classList.add('active');
-        
-    }
     
     function closeModal() {
         
@@ -131,10 +126,6 @@ const buttonEvents = (() => {
         overlayNewProj.classList.remove('active');   
     }
     
-    function closeEditModal() {
-        modalEditProj.classList.remove('active');
-        overlayNewProj.classList.remove('active');   
-    }
     
     function restartForm() {
         const projectTitleInput = document.getElementById('proj-name');
@@ -153,7 +144,6 @@ function createProject (identifier) {
      const textContainer = document.createElement('a');
      const iconsContainer = document.createElement('div');
      const projectText = document.createElement('p');
-     const editIcon = document.createElement('button');
      const deleteIcon = document.createElement('button');
 
      //PROJECT CARD
@@ -178,18 +168,12 @@ function createProject (identifier) {
      projectText.classList.add('project-text-name');
      projectText.textContent = identifier;
 
-     //EDIT ICON
-     editIcon.setAttribute('data-proj-identifier', identifier);
-     editIcon.textContent = 'edit';
-     editIcon.classList.add('edit-btn')
-
      //DELETE ICON
      deleteIcon.setAttribute('data-proj-identifier', identifier);
      deleteIcon.textContent = 'delete';
 
      //APPEND DOM CREATED ELEMENTS TO THE projects-div-store
      textContainer.appendChild(projectText);
-     iconsContainer.appendChild(editIcon);
      iconsContainer.appendChild(deleteIcon);
      textAndIcons.appendChild(textContainer);
      textAndIcons.appendChild(iconsContainer);
@@ -202,37 +186,24 @@ function createProject (identifier) {
     //DELETE BUTTONS FUNCTION
     deleteIcon.addEventListener('click', function (e) {
         let projectIndex = projects.projectsContainer.findIndex(elem => elem.name === e.target.parentNode.dataset.projIdentifier);
-        projects.projectsContainer.splice(projectIndex, 1);
         let removePorject = document.querySelector(`[data-proj-identifier='${identifier}']`);
+        let pageTitle = document.querySelector('.page-title');
+        let projIdentifier = e.target.parentNode.dataset.projIdentifier;
+
+        console.log(projIdentifier);
+        console.log(pageTitle.textContent);
+
+        projects.projectsContainer.splice(projectIndex, 1);
         removePorject.remove();
         projectsLocalStorage();
+
+        if (projIdentifier === pageTitle.textContent) {
+            clearContent();
+        } else {
+            return;
+        }
     });
 
-    //EDIT ICON FUNCTION
-    editIcon.addEventListener('click', function (e){
-        openEditModal();
-        let projectIndex = projects.projectsContainer.findIndex(elem => elem.name === e.target.parentNode.dataset.projIdentifier);
-        editBtn.addEventListener('click', (e) => {
-            const editInput = document.getElementById('new-proj-name');
-            let newName = editInput.value;
-            //Added a validator procces, so the projects can´t have the same name
-            if (newName === ''){return}
-            else if (editValidation(newName)){
-            //------------------------------------
-            projects.projectsContainer[projectIndex].name = newName;
-            projects.projectsContainer[projectIndex].id = newName;
-            
-            }
-            else{
-                alert("You already have a project with that name!");
-                // restartEditForm();
-            }    
-            projectsLocalStorage();
-            console.log(projects.projectsContainer);
-        })
-        
-
-    });
 
 //PROJECT ANCHORS FUNCTIONS AND LISTENERS
 
@@ -241,16 +212,13 @@ function createProject (identifier) {
     projectCards.forEach(projectCard => projectCard.addEventListener('click', (e) => {
         clearContent();
         const projectName = e.target.parentNode.dataset.projIdentifier;
-        projectTitleDisplay(projectName);
         pageTilte(projectName);
     }));
 
 
-    function projectTitleDisplay(nameOfProject) {
-        console.log(nameOfProject);
-    };
 
 };    
+
 
 
 //SAVE THE proyectList AS 'projects' INSIDE THE LOCAL STORAGE
@@ -266,9 +234,6 @@ function projValidation(projectToValidate){
     return !projects.projectsContainer.some(project => project.name === projectToValidate.name);
 }
 
-function editValidation(projectToValidate){
-    return !projects.projectsContainer.some(project => project.name === projectToValidate);
-}
 
 //RESTART TH PROJECT CREATOR FORM
 function restartProjectForm() {
@@ -276,13 +241,12 @@ function restartProjectForm() {
     projectTitleInput.value = '';
 }
 
-function restartEditForm() {
-    const projectEditTitleInput = document.getElementById('new-proj-name');
-    projectEditTitleInput.value = '';
+
+//STARTING PAGE
+function loadStartPage() {
+    clearContent();
+
 }
-
-
-
 
 
 export  {
