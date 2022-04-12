@@ -1,5 +1,11 @@
 'use strict';
 
+const startPage = () => {
+    const pageContent = document.querySelector('#content');
+    const imageInit = document.createElement('img');
+    
+};
+
 const pageTilte = (title) => {
     const pageContent = document.querySelector('#content');
     const titleContent = document.createElement('div');    
