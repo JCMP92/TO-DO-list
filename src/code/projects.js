@@ -1,4 +1,5 @@
-import { pageTilte, clearContent } from "./modules/builders";
+import { pageTilte, clearContent, pageContent } from "./modules/builders";
+import { createTask } from "./tasks";
 
 const projects = (() => {
 
@@ -34,9 +35,7 @@ const projects = (() => {
 
     function showStoredProjects () {
         for (let i= 0; i < projectsContainer.length; i++) {
-            
             createProject(projectsContainer[i].name);
-            console.log(projectsContainer[i].name);
         }
     };
 
@@ -45,10 +44,9 @@ const projects = (() => {
         const projectTitleInput = document.getElementById('proj-name');
         const name = projectTitleInput.value; 
         const project = new Project(name);
-        //Added a validator procces, so the projects can´t have the same name
+        //Validator
         if (name === ''){return}
         else if (projValidation(project)){
-        //------------------------------------
         projectsContainer.push(project);
         createProject(name);
         projectsLocalStorage();
@@ -82,9 +80,7 @@ const projects = (() => {
 
 const newProjBtn = document.querySelector('.new-proj-btn');
 const closeModalButton = document.querySelector('[data-close-button]');
-
 const modalNewProj = document.getElementById('modal-newproj');
-
 const overlayNewProj = document.getElementById('overlay-newproj');
 const doneBtn = document.getElementById('done-btn');
 
@@ -96,9 +92,7 @@ const buttonEvents = (() => {
     
         newProjBtn.addEventListener('click', openModal);
         closeModalButton.addEventListener('click', closeModal);
-
         overlayNewProj.addEventListener('click', closeModal);
-
         doneBtn.addEventListener('click', projects.newProject);
         doneBtn.addEventListener('click', closeModal);
         doneBtn.addEventListener('click', restartForm);
@@ -168,7 +162,7 @@ function createProject (identifier) {
      projectText.classList.add('project-text-name');
      projectText.textContent = identifier;
 
-     //DELETE ICON
+     //DELETE BUTTON
      deleteIcon.setAttribute('data-proj-identifier', identifier);
      deleteIcon.textContent = 'delete';
 
@@ -190,9 +184,6 @@ function createProject (identifier) {
         let pageTitle = document.querySelector('.page-title');
         let projIdentifier = e.target.parentNode.dataset.projIdentifier;
 
-        console.log(projIdentifier);
-        console.log(pageTitle.textContent);
-
         projects.projectsContainer.splice(projectIndex, 1);
         removePorject.remove();
         projectsLocalStorage();
@@ -202,6 +193,9 @@ function createProject (identifier) {
         } else {
             return;
         }
+      
+
+        
     });
 
 
@@ -213,9 +207,17 @@ function createProject (identifier) {
         clearContent();
         const projectName = e.target.parentNode.dataset.projIdentifier;
         pageTilte(projectName);
+        pageContent(projectName);
+
+        if(localStorage.getItem('projects') === null){//Review this--------------------------------------------------------------IMPORTANT
+            return;
+        }else{
+            showStoredTasks();
+        }
+
     }));
 
-
+    
 
 };    
 
@@ -235,7 +237,7 @@ function projValidation(projectToValidate){
 }
 
 
-//RESTART TH PROJECT CREATOR FORM
+//RESTART THE PROJECT CREATOR FORM
 function restartProjectForm() {
     const projectTitleInput = document.getElementById('proj-name');
     projectTitleInput.value = '';
@@ -248,8 +250,22 @@ function loadStartPage() {
 
 }
 
+function showStoredTasks() {
+    const storedProjects =JSON.parse(localStorage.getItem('projects'));
+    projects.projectsContainer = storedProjects;
+    console.log( projects.projectsContainer);
+
+    const projName = document.querySelector('.page-title').textContent;
+    let projectIndex = projects.projectsContainer.findIndex(elem => elem.name === projName);
+    for (let i= 0; i < projects.projectsContainer[projectIndex].tasks.length; i++){
+        console.log(projects.projectsContainer[projectIndex].tasks.length);
+        createTask(projects.projectsContainer[projectIndex].tasks[i].title, projects.projectsContainer[projectIndex].tasks[i].date);
+    }
+    
+}
 
 export  {
     projects,
-    buttonEvents
+    buttonEvents,
+
 }

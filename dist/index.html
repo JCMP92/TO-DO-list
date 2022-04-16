@@ -52,7 +52,7 @@
 
                         <form> 
                             <label for="proj-name" class="name-proj">Project Name</label>
-                                <input type="text" name="proj-name" id="proj-name" placeholder="e.g. Learn Front End Development" required>
+                                <input type="text" name="proj-name" id="proj-name" placeholder="e.g. Learn to Code" required>
                                                     
                             <button id="done-btn">Done</button>
                         </form>
@@ -62,21 +62,25 @@
         </div>
     </div>
 
-    <!-- MODAL FOR EDIT PROJECT -->
-    <div class="modal-editproj no-display" id="modal-editproj">
-        <div class="modal-header-editproj" id="modal-header-editproj">
-            <div class="modal-title-editproj" id="modal-title-editproj">
-                <h2>Edit Project Name</h2>
+    <!-- MODAL FOR TASK -->
+    <div class="modal-task no-display" id="modal-task">
+        <div class="modal-header-task" id="modal-header-task">
+            <div class="modal-title-task" id="modal-title-task">
+                <h2>New Task</h2>
             </div>
             <button data-edit-close class="close-btn">&times;</button>  <!-- &times; is an html entity, this doesn´t scale by the size of the font -->
         </div>
-        <div class="modal-body-editproj" id="modal-body-editproj">
+        <div class="modal-body-task" id="modal-body-task">
 
                         <form> 
-                            <label for="new-proj-name" class="new-name-proj">New Project Name</label>
-                                <input type="text" name="new-proj-name" id="new-proj-name" placeholder="e.g. Learn Front End Development" required>
+                            <label for="new-task-title" class="new-title-task">Task Name</label>
+                                <input type="text" name="new-task-title" id="new-task-title" placeholder="e.g. CSS and HTML Tutorials" required>
+
+                            <label for="task-date" class="task-date">Due Date</label>
+                                <input type="date" id="due-date" class="due-date" required>
+
                                                     
-                            <button id="edit-btn">Edit Name</button>
+                            <button id="done-task-btn">Done</button>
                         </form>
                 </div>
             </div>

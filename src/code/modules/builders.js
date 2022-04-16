@@ -1,3 +1,6 @@
+import { openTaskModal, tasks, taskButtonEvents } from "../tasks";
+
+
 'use strict';
 
 const startPage = () => {
@@ -8,27 +11,31 @@ const startPage = () => {
 
 const pageTilte = (title) => {
     const pageContent = document.querySelector('#content');
-    const titleContent = document.createElement('div');    
+    const titleContent = document.createElement('div');   
     const titleText = document.createElement('h2');
+    const addBtn = document.createElement('button'); 
+
         titleText.classList.add('page-title');    
         titleText.textContent = title;
+
+        addBtn.setAttribute('class', 'add-btn');
+        addBtn.textContent = 'Add';
+        addBtn.addEventListener('click', taskButtonEvents.openTaskModal)
     
     titleContent.appendChild(titleText);
+    titleContent.appendChild(addBtn);
     pageContent.appendChild(titleContent);
     
-    // return titleContent;
 }
 
-const pageContent = (btnName, btnId) => {
+const pageContent = (project) => {
+    const mainContent= document.getElementById('content');
     const pageContent = document.createElement('div');
-        pageContent.setAttribute('id', 'page-content');
-    const addBtn = document.createElement('button');
-        addBtn.setAttribute('id', btnId);
-        addBtn.textContent = btnName;
+        pageContent.setAttribute('id', 'page-content'+`${project}`);
+        pageContent.classList.add('tasks-displayer');
     
-    pageContent.appendChild(addBtn);
-
-    return pageContent;
+    mainContent.appendChild(pageContent);
+    
 }
 
 const clearContent = () => {

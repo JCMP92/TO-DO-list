@@ -96,8 +96,8 @@
 
 
 
-//MODAL TO EDIT AN EXISTING PROJECT---------------------------------------------------------------------------------------------------------------------------
-.modal-editproj{
+//MODAL TO CREATE NEW TASK---------------------------------------------------------------------------------------------------------------------------
+.modal-task{
   position:fixed;
   top: 50%;
   left: 50%;
@@ -111,7 +111,7 @@
   width: 500px;
   max-width: 80%;
 
-  .modal-header-editproj{
+  .modal-header-task{
       padding: 5px 15px;
       display: flex;
       justify-content: space-between;
@@ -130,7 +130,7 @@
           color: blue;
       }
   }
-  .modal-body-editproj{
+  .modal-body-task{
       font-size: 1.2rem;
       padding: 10px 15px;
         form{
@@ -165,25 +165,25 @@
 
 }
 
-.modal-editproj.active{
+.modal-task.active{
   transform: translate(-50%, -50%) scale(1);
 }
 
-#overlay-editproj{
-  position: fixed;
-  opacity: 0;
-  transition: 100ms ease-in-out;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, .5);
-  pointer-events: none;
-}
-#overlay-editproj.active{
-  opacity: 1;
-  pointer-events: all;
-}
+// #overlay-editproj{
+//   position: fixed;
+//   opacity: 0;
+//   transition: 100ms ease-in-out;
+//   top: 0;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   background-color: rgba(0, 0, 0, .5);
+//   pointer-events: none;
+// }
+// #overlay-editproj.active{
+//   opacity: 1;
+//   pointer-events: all;
+// }
 
 .no-display{
   display: none;
