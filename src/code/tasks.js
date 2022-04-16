@@ -72,9 +72,10 @@ const taskButtonEvents = (() => {
 
 //FUNCTION TO CREATE A NEW TASK
 function createTask (identifier, dateInputVal) {
-    const projTitle = document.querySelector('.page-title').textContent;
-    const mainContent = document.getElementById('page-content'+projTitle);
 
+    const projTitle = document.querySelector('.page-title');
+    const projName = projTitle.textContent;
+    const mainContent = document.getElementById('page-content'+ projName);
 //CREATION OF THE TASK CARD
     const taskCard = document.createElement('div');
     const leftCard = document.createElement('div');
@@ -149,13 +150,7 @@ function restartTaskForm() {
     taskTitleInput.value = '';
 };
 
-// function showStoredTasks() {
-//     const projName = document.querySelector('.page-title').textContent;
-//     let projectIndex = projects.projectsContainer.findIndex(elem => elem.name === projName);
-//     for (let i= 0; i < projects.projectsContainer[projectIndex].tasks.length; i++){
-//         createTask(projects.projectsContainer[i].tasks.title, projects.projectsContainer[i].tasks.date);
-//     }
-// }
+
 
 export {
     tasks,

@@ -253,12 +253,10 @@ function loadStartPage() {
 function showStoredTasks() {
     const storedProjects =JSON.parse(localStorage.getItem('projects'));
     projects.projectsContainer = storedProjects;
-    console.log( projects.projectsContainer);
 
     const projName = document.querySelector('.page-title').textContent;
     let projectIndex = projects.projectsContainer.findIndex(elem => elem.name === projName);
     for (let i= 0; i < projects.projectsContainer[projectIndex].tasks.length; i++){
-        console.log(projects.projectsContainer[projectIndex].tasks.length);
         createTask(projects.projectsContainer[projectIndex].tasks[i].title, projects.projectsContainer[projectIndex].tasks[i].date);
     }
     

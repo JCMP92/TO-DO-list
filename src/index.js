@@ -8,5 +8,5 @@ import"./style/style.scss";
 console.log(projects.projectsContainer);
 
 
-createTask('JAVASCRIPT', 'Code');
+
 
