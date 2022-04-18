@@ -183,18 +183,23 @@ function createProject (identifier) {
         let removePorject = document.querySelector(`[data-proj-identifier='${identifier}']`);
         let pageTitle = document.querySelector('.page-title');
         let projIdentifier = e.target.parentNode.dataset.projIdentifier;
-
         projects.projectsContainer.splice(projectIndex, 1);
         removePorject.remove();
         projectsLocalStorage();
+        
 
-        if (projIdentifier === pageTitle.textContent) {
+        if (pageTitle.textContent)
+        {
+            if (projIdentifier === pageTitle.textContent) {
             clearContent();
-        } else {
-            return;
-        }
+            const projectCount = document.querySelector('.project-count');
+            projectCount.textContent = projects.projectsContainer.length;
+                        
+            } else {
+                return;
+            }
+        };
       
-
         
     });
 
