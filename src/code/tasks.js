@@ -136,6 +136,22 @@ function createTask (identifier, dateInputVal) {
     mainContent.appendChild(taskCard);
 
 
+    //DELETE TASK BUTTON FUNCTIONS-----------------------------------------------------------
+    deleteTask.addEventListener('click', (e) => {
+        
+        const projName = document.querySelector('.page-title').textContent;
+        let projectIndex = projects.projectsContainer.findIndex(elem => elem.name === projName);
+        let taskIndex = projects.projectsContainer[projectIndex].tasks.findIndex(elem => elem.title === e.target.parentNode.dataset.taskIdentifier);
+        let removeTask = document.querySelector(`[data-task-identifier='${identifier}']`);
+        projects.projectsContainer[projectIndex].tasks.splice(taskIndex, 1);
+        removeTask.remove();
+        projectsLocalStorage();
+        
+        console.log(projects.projectsContainer[projectIndex].tasks);
+        // let taskIndex = projects.projectsContainer.findIndex(elem => elem.name === e.target.parentNode.dataset.projIdentifier);
+    })
+
+
 };
 
 //STORAGE FUNCTION
