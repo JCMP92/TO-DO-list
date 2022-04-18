@@ -1,5 +1,6 @@
 import { projects } from "./projects";
 
+
 const tasks = (() => {
     class Task {
         constructor(title, date){
@@ -29,10 +30,11 @@ const tasks = (() => {
 ();
 
 //BUTTONS AND EVENTS LISTENERS--------------------------------------------------------------------------------------------------
-const TaskModal = document.querySelector('.modal-task');
+const taskModal = document.querySelector('.modal-task');
 const overlayNewProj = document.getElementById('overlay-newproj');
 const closeModalTask = document.querySelector('[data-edit-close]');
 const addTask = document.getElementById('done-task-btn');
+const taskEdit = document.querySelector('.modal-task-ed');
 
 
 
@@ -47,18 +49,18 @@ const taskButtonEvents = (() => {
     addTask.addEventListener('click', restartTaskForm);
 
     function openTaskModal() {
-        TaskModal.classList.add('active');
+        taskModal.classList.add('active');
         overlayNewProj.classList.add('active');
         
     };
 
     function closeModal() {
-        TaskModal.classList.remove('active');
+        taskModal.classList.remove('active');
         overlayNewProj.classList.remove('active');   
     }
 
     function displayModal() {
-        TaskModal.classList.remove('no-display');
+        taskModal.classList.remove('no-display');
 
     };
 
@@ -84,7 +86,6 @@ function createTask (identifier, dateInputVal) {
     const title = document.createElement('p');
     const date = document.createElement('p');
     const buttonsContainer = document.createElement('div');
-    const editTask = document.createElement('button');
     const deleteTask = document.createElement('button');
 
     //TASK CARD-------------------------------------------------------------------------------
@@ -117,15 +118,11 @@ function createTask (identifier, dateInputVal) {
     buttonsContainer.setAttribute('data-task-identifier', identifier);
     buttonsContainer.classList.add('buttons-container');
 
-    //EDIT BUTTON----------------------------------------------------------------------------
-    editTask.setAttribute('data-proj-identifier', identifier);
-    editTask.textContent = 'edit';
-
     //DELETE BUTTON--------------------------------------------------------------------------
     deleteTask.setAttribute('data-proj-identifier', identifier);
     deleteTask.textContent = 'delete';
 
-    buttonsContainer.appendChild(editTask);
+
     buttonsContainer.appendChild(deleteTask);
     leftCard.appendChild(checkDone);
     leftCard.appendChild(title);
@@ -146,9 +143,7 @@ function createTask (identifier, dateInputVal) {
         projects.projectsContainer[projectIndex].tasks.splice(taskIndex, 1);
         removeTask.remove();
         projectsLocalStorage();
-        
-        console.log(projects.projectsContainer[projectIndex].tasks);
-        // let taskIndex = projects.projectsContainer.findIndex(elem => elem.name === e.target.parentNode.dataset.projIdentifier);
+
     })
 
 
